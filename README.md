@@ -125,12 +125,42 @@ src/
 │   ├── index.tsx
 │   └── sketches.$sketchId.tsx
 ├── sketches/
-│   └── demo.ts
+│   └── dawn-1.ts
+│   └── flare-1.ts
 ├── stores/
 ├── tsl/
+│   ├── noise/
+│   │   ├── common.ts
+│   │   ├── curl_noise_3d.ts
+│   │   ├── curl_noise_4d.ts
+│   │   ├── fbm.ts
+│   │   ├── perlin_noise_3d.ts
+│   │   ├── simplex_noise_3d.ts
+│   │   ├── simplex_noise_4d.ts
+│   │   └── turbulence.ts
+│   ├── post_processing/
+│   │   ├── grain_texture_effect.ts
+│   │   ├── lcd_effect.ts
+│   │   └── post_processing.tsx
 │   └── utils/
+│       ├── color/
+│       │   ├── cosine_palette.ts
+│       │   └── tonemapping.ts
 │       ├── function/
+│       │   ├── bloom.ts
+│       │   ├── bloom_edge_pattern.ts
+│       │   ├── domain_index.ts
+│       │   ├── median3.ts
+│       │   ├── repeating_pattern.ts
 │       │   └── screen_aspect_uv.ts
+│       ├── lighting.ts
+│       ├── math/
+│       │   ├── complex.ts
+│       │   └── coordinates.ts
+│       ├── sdf/
+│       │   ├── operations.ts
+│       │   └── shapes.ts
+│       └── texture.ts
 ├── utils/
 │   ├── cn.ts
 │   ├── error_boundary.tsx

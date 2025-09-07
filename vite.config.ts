@@ -23,6 +23,7 @@ export default defineConfig({
       '@/stores': path.resolve(__dirname, 'src/stores'),
       '@/utils': path.resolve(__dirname, 'src/utils'),
       '@/tsl': path.resolve(__dirname, 'src/tsl'),
+      '@/sketches': path.resolve(__dirname, 'src/sketches'),
     },
   },
 })

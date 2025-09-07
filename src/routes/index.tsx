@@ -2,7 +2,7 @@ import WebGPUScene from '@/components/canvas/webgpu_scene'
 import { WebGPUSketch } from '@/components/canvas/webgpu_sketch'
 import { createFileRoute } from '@tanstack/react-router'
 import { Suspense, useRef } from 'react'
-import { Fn, oscSine, time, uv, vec3 } from 'three/tsl'
+import flare1 from '@/sketches/flare-1'
 
 export const Route = createFileRoute('/')({
   component: Index,
@@ -10,8 +10,6 @@ export const Route = createFileRoute('/')({
 
 function Index() {
   const ref = useRef<any>(null)
-
-  const colorNode = Fn(() => vec3(uv(), oscSine(time.mul(0.5))))
 
   return (
     <section className='fragments-boilerplate__main__canvas' ref={ref}>
@@ -25,7 +23,7 @@ function Index() {
           eventSource={ref}
           eventPrefix='client'
         >
-          <WebGPUSketch colorNode={colorNode()} />
+          <WebGPUSketch colorNode={flare1()} />
         </WebGPUScene>
       </Suspense>
     </section>
