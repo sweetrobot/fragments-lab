@@ -3,7 +3,7 @@ import { Suspense, useEffect, useRef, useState } from 'react'
 import WebGPUScene from '@/components/canvas/webgpu_scene'
 import { WebGPUSketch } from '@/components/canvas/webgpu_sketch'
 
-export const Route = createFileRoute('/sketches/$sketchId')({
+export const Route = createFileRoute('/sketches/$')({
   component: RouteComponent,
 })
 
@@ -14,20 +14,24 @@ if (import.meta.hot) {
 }
 
 function RouteComponent() {
-  const { sketchId } = Route.useParams()
+  const { _splat: sketchPath } = Route.useParams()
 
   const [module, setModule] = useState<any>({})
 
-  const sketches: Record<string, { default: () => any }> = import.meta.glob('../sketches/*.ts', { eager: true })
+  // Updated glob pattern to include subfolders
+  const sketches: Record<string, { default: () => any }> = import.meta.glob('../sketches/**/*.ts', { eager: true })
 
   useEffect(() => {
-    const mod = sketches[`../sketches/${sketchId}.ts`]
+    // Convert URL path to file path
+    const filePath = `../sketches/${sketchPath}.ts`
+    const mod = sketches[filePath]
+
     if (mod) {
       setModule({ colorNode: mod.default })
     } else {
-      console.error('Sketch not found:', sketchId)
+      console.error('Sketch not found:', sketchPath)
     }
-  }, [sketchId])
+  }, [sketchPath])
 
   const ref = useRef<any>(null)
 

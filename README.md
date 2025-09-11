@@ -28,7 +28,11 @@ pnpm dev
 
 The quickest way to get started is to add a new sketch to the `src/sketches` directory.
 
-This will add a new route to the project that can be accessed at `[localhost]/sketches/[name_of_sketch]`. So if you create a new sketch called `demo.ts` in the `src/sketches` directory, you can access it at `[localhost]/sketches/demo`.
+This will add a new route to the project that can be accessed at `[localhost]/sketches/[path_to_sketch]`. You can organize sketches in subfolders for better organization:
+
+- `src/sketches/demo.ts` → accessible at `[localhost]/sketches/demo`
+- `src/sketches/effects/bloom.ts` → accessible at `[localhost]/sketches/effects/bloom`
+- `src/sketches/experiments/noise.ts` → accessible at `[localhost]/sketches/experiments/noise`
 
 ### Example sketch structure
 
@@ -123,10 +127,12 @@ src/
 ├── routes/
 │   ├── __root.tsx
 │   ├── index.tsx
-│   └── sketches.$sketchId.tsx
+│   └── sketches.$.tsx
 ├── sketches/
-│   └── dawn-1.ts
-│   └── flare-1.ts
+│   ├── dawn-1.ts
+│   ├── flare-1.ts
+│   └── nested/
+│       └── dawn-1.ts
 ├── stores/
 ├── tsl/
 │   ├── noise/
