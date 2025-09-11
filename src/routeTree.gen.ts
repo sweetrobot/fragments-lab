@@ -10,43 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as SketchesSketchIdRouteImport } from './routes/sketches.$sketchId'
+import { Route as SketchesSplatRouteImport } from './routes/sketches.$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SketchesSketchIdRoute = SketchesSketchIdRouteImport.update({
-  id: '/sketches/$sketchId',
-  path: '/sketches/$sketchId',
+const SketchesSplatRoute = SketchesSplatRouteImport.update({
+  id: '/sketches/$',
+  path: '/sketches/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/sketches/$sketchId': typeof SketchesSketchIdRoute
+  '/sketches/$': typeof SketchesSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/sketches/$sketchId': typeof SketchesSketchIdRoute
+  '/sketches/$': typeof SketchesSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/sketches/$sketchId': typeof SketchesSketchIdRoute
+  '/sketches/$': typeof SketchesSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sketches/$sketchId'
+  fullPaths: '/' | '/sketches/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sketches/$sketchId'
-  id: '__root__' | '/' | '/sketches/$sketchId'
+  to: '/' | '/sketches/$'
+  id: '__root__' | '/' | '/sketches/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  SketchesSketchIdRoute: typeof SketchesSketchIdRoute
+  SketchesSplatRoute: typeof SketchesSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,11 +58,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sketches/$sketchId': {
-      id: '/sketches/$sketchId'
-      path: '/sketches/$sketchId'
-      fullPath: '/sketches/$sketchId'
-      preLoaderRoute: typeof SketchesSketchIdRouteImport
+    '/sketches/$': {
+      id: '/sketches/$'
+      path: '/sketches/$'
+      fullPath: '/sketches/$'
+      preLoaderRoute: typeof SketchesSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -70,7 +70,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  SketchesSketchIdRoute: SketchesSketchIdRoute,
+  SketchesSplatRoute: SketchesSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
