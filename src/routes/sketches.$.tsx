@@ -95,34 +95,29 @@ function RouteComponent() {
         onClick={copyEmbedCode}
         style={{
           position: 'fixed',
-          top: '110px',
-          left: '20px',
+          top: '20px',
+          left: '190px',
           zIndex: 10,
           padding: '12px 20px',
-          background: copied 
-            ? 'rgba(50, 200, 100, 0.3)' 
-            : 'rgba(100, 150, 255, 0.3)',
-          border: copied
-            ? '1px solid rgba(50, 200, 100, 0.5)'
-            : '1px solid rgba(100, 150, 255, 0.5)',
-          borderRadius: '8px',
+          background: copied ? '#16a34a' : '#000',
+          border: 'none',
+          borderRadius: '0',
           color: '#fff',
           cursor: 'pointer',
           fontSize: '13px',
           fontWeight: 600,
-          backdropFilter: 'blur(10px)',
           transition: 'all 0.2s ease',
           letterSpacing: '0.03em',
           fontFamily: 'inherit'
         }}
         onMouseEnter={(e) => {
           if (!copied) {
-            e.currentTarget.style.background = 'rgba(100, 150, 255, 0.4)'
+            e.currentTarget.style.background = '#1a1a1a'
           }
         }}
         onMouseLeave={(e) => {
           if (!copied) {
-            e.currentTarget.style.background = 'rgba(100, 150, 255, 0.3)'
+            e.currentTarget.style.background = '#000'
           }
         }}
       >
