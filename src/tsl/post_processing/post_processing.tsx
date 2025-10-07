@@ -1,6 +1,6 @@
 import { useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useRef } from 'react'
-import { mrt, pass, emissive, output, screenSize } from 'three/tsl'
+import { mrt, pass, emissive, output } from 'three/tsl'
 import * as THREE from 'three/webgpu'
 
 export const PostProcessing = ({ effect }) => {

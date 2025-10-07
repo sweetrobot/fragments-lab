@@ -1,4 +1,4 @@
-import { Fn, fract, abs, pow, uniform, smoothstep, max, length, screenSize, vec2 } from 'three/tsl'
+import { Fn, fract, pow, uniform, smoothstep, length, screenSize } from 'three/tsl'
 import { screenAspectUV } from '@/tsl/utils/function/screen_aspect_uv'
 /**
  * Creates an LCD screen effect with configurable parameters.
