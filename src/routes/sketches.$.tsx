@@ -18,6 +18,7 @@ function RouteComponent() {
   const { _splat: sketchPath } = Route.useParams()
 
   const [module, setModule] = useState<any>({})
+  const [copied, setCopied] = useState(false)
 
   // Updated glob pattern to include subfolders
   const sketches: Record<string, { default: () => any }> = import.meta.glob('../sketches/**/*.ts', { eager: true })
@@ -38,6 +39,37 @@ function RouteComponent() {
 
   const { colorNode } = module
 
+  const generateEmbedCode = () => {
+    const deployedUrl = window.location.origin
+    return `<!-- Embed ${sketchPath} fragment -->
+<iframe 
+  src="${deployedUrl}/sketches/${sketchPath}"
+  width="100%" 
+  height="600px"
+  frameborder="0"
+  style="border: none; display: block;">
+</iframe>
+
+<!-- For full viewport height: -->
+<iframe 
+  src="${deployedUrl}/sketches/${sketchPath}"
+  width="100%" 
+  height="100vh"
+  frameborder="0"
+  style="border: none; display: block;">
+</iframe>`
+  }
+
+  const copyEmbedCode = async () => {
+    try {
+      await navigator.clipboard.writeText(generateEmbedCode())
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy:', err)
+    }
+  }
+
   return (
     <section className='fragments-boilerplate__main__canvas' ref={ref}>
       <Suspense fallback={null}>
@@ -57,6 +89,45 @@ function RouteComponent() {
       </Suspense>
 
       <SketchesDropdown />
+      
+      {/* Copy Embed Code Button */}
+      <button
+        onClick={copyEmbedCode}
+        style={{
+          position: 'fixed',
+          top: '110px',
+          left: '20px',
+          zIndex: 10,
+          padding: '12px 20px',
+          background: copied 
+            ? 'rgba(50, 200, 100, 0.3)' 
+            : 'rgba(100, 150, 255, 0.3)',
+          border: copied
+            ? '1px solid rgba(50, 200, 100, 0.5)'
+            : '1px solid rgba(100, 150, 255, 0.5)',
+          borderRadius: '8px',
+          color: '#fff',
+          cursor: 'pointer',
+          fontSize: '13px',
+          fontWeight: 600,
+          backdropFilter: 'blur(10px)',
+          transition: 'all 0.2s ease',
+          letterSpacing: '0.03em',
+          fontFamily: 'inherit'
+        }}
+        onMouseEnter={(e) => {
+          if (!copied) {
+            e.currentTarget.style.background = 'rgba(100, 150, 255, 0.4)'
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!copied) {
+            e.currentTarget.style.background = 'rgba(100, 150, 255, 0.3)'
+          }
+        }}
+      >
+        {copied ? '✓ Copied!' : '📋 Copy Embed Code'}
+      </button>
     </section>
   )
 }
