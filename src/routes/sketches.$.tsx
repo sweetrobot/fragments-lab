@@ -44,7 +44,7 @@ function RouteComponent() {
 
   const generateEmbedCode = () => {
     const deployedUrl = window.location.origin
-    return `<!-- Embed ${sketchPath} fragment -->
+    return `<!-- Embed ${sketchPath} fragment - Fixed Height -->
 <iframe 
   src="${deployedUrl}/sketches/${sketchPath}?embed=true"
   width="100%" 
@@ -53,13 +53,18 @@ function RouteComponent() {
   style="border: none; display: block;">
 </iframe>
 
-<!-- For full viewport height: -->
+<!-- For container with 100vh - use height: 100% -->
 <iframe 
   src="${deployedUrl}/sketches/${sketchPath}?embed=true"
-  width="100%" 
-  height="100vh"
   frameborder="0"
-  style="border: none; display: block;">
+  style="width: 100%; height: 100%; border: none; display: block;">
+</iframe>
+
+<!-- For full viewport (position: absolute parent) -->
+<iframe 
+  src="${deployedUrl}/sketches/${sketchPath}?embed=true"
+  frameborder="0"
+  style="position: absolute; inset: 0; width: 100%; height: 100%; border: none;">
 </iframe>`
   }
 
