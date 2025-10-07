@@ -19,6 +19,9 @@ function RouteComponent() {
 
   const [module, setModule] = useState<any>({})
   const [copied, setCopied] = useState(false)
+  
+  // Check if in embed mode via URL parameter
+  const isEmbedMode = new URLSearchParams(window.location.search).get('embed') === 'true'
 
   // Updated glob pattern to include subfolders
   const sketches: Record<string, { default: () => any }> = import.meta.glob('../sketches/**/*.ts', { eager: true })
@@ -43,7 +46,7 @@ function RouteComponent() {
     const deployedUrl = window.location.origin
     return `<!-- Embed ${sketchPath} fragment -->
 <iframe 
-  src="${deployedUrl}/sketches/${sketchPath}"
+  src="${deployedUrl}/sketches/${sketchPath}?embed=true"
   width="100%" 
   height="600px"
   frameborder="0"
@@ -52,7 +55,7 @@ function RouteComponent() {
 
 <!-- For full viewport height: -->
 <iframe 
-  src="${deployedUrl}/sketches/${sketchPath}"
+  src="${deployedUrl}/sketches/${sketchPath}?embed=true"
   width="100%" 
   height="100vh"
   frameborder="0"
@@ -88,10 +91,10 @@ function RouteComponent() {
         ) : null}
       </Suspense>
 
-      <SketchesDropdown />
+      {!isEmbedMode && <SketchesDropdown />}
       
       {/* Copy Embed Code Button */}
-      <button
+      {!isEmbedMode && <button
         onClick={copyEmbedCode}
         style={{
           position: 'fixed',
@@ -122,7 +125,7 @@ function RouteComponent() {
         }}
       >
         {copied ? '✓ Copied!' : '📋 Copy Embed Code'}
-      </button>
+      </button>}
     </section>
   )
 }
